@@ -21,16 +21,32 @@ app.use (express.static(publicPath));
 io.on('connection', (socket)=>{
     console.log('new user connected.'); 
 
+    /*challenge:
+        1. socket.emit from Admin text Welcome to chat appp
+        2. socket.broadcast.emit from admin text new user joined
+    */
+
+    //1. Prompt current socket: Welcome message .....
+    socket.emit('newMessage',{
+        from: "Admin",
+        text: "Welcome to the chat Rooom"
+    })
+
+    // 2. Promp Everyone: new user joined
+    socket.broadcast.emit('newMessage',{
+        from: "Admin",
+        text: "New user joined"
+    })  
+
+
     // Handle message sent by client
     socket.on('createMessage', (message)=>{
-        console.log('createMessage: ', message); 
-
-        io.emit('newMessage',{
+        // console.log('createMessage: ', message); 
+        socket.broadcast.emit('newMessage',{
             from: message.from,
             text: message.text,
             createdAt: new Date().getTime()
-        });
-        
+        });  
     });    
 
     // User Disconnected

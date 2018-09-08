@@ -5,13 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Chat Demo</title>
+ 
+    <link rel="stylesheet" href="./CSS/style-1.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to Chap Application</h1>
+
     </header>
+
+    <div class="container">
+        <div class="banner">
+             Welcome to Chat Application
+        </div>    
     
+        
+    <div >
+        <h4>Messages Received</h4>
+        <ul class="messagesDetail" id="messageList"></ul>
+    </div>
+       
+
+    <form class="userInput" id="frmMessage" action="">
+        <div class="userInput-line">            
+            <label  for="curUser">Your Name</label> 
+            <input type="text" id="curUser"> 
+        </div>
+        
+        <div class="userInput-line">
+            <label for="curMessage">Your Message</label>
+            <input type="text" id="curMessage">             
+            <button id="sendBtn">Send</button>
+        </div>        
+    </form>
+    <button id="send-location">Send location</button>
+
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/index.js"> </script>
 </body>

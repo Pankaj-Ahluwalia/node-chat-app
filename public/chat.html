@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat Demo</title>
+
+    <link rel="stylesheet" href="./CSS/styles-2.css">
+</head>
+
+<body class="chat">
+    <div class="chat__sidebar">
+        <h3>People</h3>
+        <div id="users">
+        </div>
+    </div>
+
+    <div class="chat__main">
+        <ul id="messages" class="chat__messages">
+            <!-- <li class="message">
+                <div class="message__title">
+                    <h4>Message-1</h4>
+                </div>
+                <span>This message was recd from Divya</span>
+            </li> -->
+        </ul>
+
+        <div class="chat__footer">
+            <form id="message-form">
+                <input id="curMessage" name="message" type="text" placehulder="Message" autofocus autocomplete="off" />
+                <button>Send</button>
+            </form>
+            <button id="send-location">Send location</button>
+        </div>
+
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/libs/moment.js"> </script>
+    <script src="./js/libs/mustache.js"> </script>
+    <!-- <script src="./js/libs/deparam.js"> </script> -->
+
+     
+    <script src="./js/chat.js"> </script>
+
+</body>
+
+
+
+</html>

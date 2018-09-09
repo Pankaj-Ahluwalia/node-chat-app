@@ -4,6 +4,8 @@ const http = require('http');
 const path =require('path');
 
 const {generateMessage, generateLocationMessage} = require('./utils/message');
+const {isRealString} = require('./utils/validation');
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -27,15 +29,31 @@ app.use (express.static(publicPath));
 io.on('connection', (socket)=>{
     console.log('new user crated'); 
 
-    //1. Prompt current socket: Welcome message .....
+    // 1. Prompt current socket: Welcome message .....
     socket.emit('newMessage', generateMessage( "Admin", "Welcome to the chat Rooom"));
 
     // 2. Promp Everyone: new user joined
     socket.broadcast.emit('newMessage',generateMessage("Admin","New user joined"));
 
+    socket.on('join',(params,callback)=>{
+        // console.log(params.name, params.room);
+
+        if ( !isRealString(params.name) || !isRealString(params.room) ){            
+            callback('Invalid name or room');
+        }
+        // // Join Room
+        // socket.join(params.room);
+        
+        // socket.leave('The office fans')
+
+        callback();
+        
+    });
+
     // Handle message sent by client
-    socket.on('createMessage', (message)=>{
-        socket.broadcast.emit('newMessage',generateMessage(message.from,message.text));  
+    socket.on('createMessage', (message, callback)=>{
+        socket.broadcast.emit('newMessage',generateMessage(message.from,message.text)); 
+        callback(); 
     });    
 
     socket.on('createLocationMessage',(coords)=>{

@@ -48,7 +48,7 @@ socket.on('newMessage', function(message){
 // newLocationMessage
 socket.on('newLocationMessage', function(message){
     // modify link url
-    message.text = `<a href="${message.url}" target="_blank" >see my location on a map</a>`
+    message.text = `<a href="${message.url}" target="_blank" >My current location</a>`
     addMessageToList(message)
 });
 

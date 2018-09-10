@@ -24,7 +24,7 @@ const publicPath = path.join(__dirname, "../public");
 app.use(express.static(publicPath));
 
 io.on("connection", socket => {
-  console.log("new user crated");
+  // console.log("new user crated");
 
   // socket.join(room[, callback])  ... Returns Socket for chaining
   // socket.leave(room[, callback]) ....Returns Socket for chaining
@@ -39,7 +39,7 @@ io.on("connection", socket => {
 
     // A) JOIN ROOM
     socket.join(theRoom, () => {
-      console.log(`${params.name} has joined room: ${theRoom}`);
+      // console.log(`${params.name} has joined room: ${theRoom}`);
 
       // ensure that use is logged out of previous room
       users.removeUser(socket.id);
@@ -110,7 +110,7 @@ io.on("connection", socket => {
 
   // User Disconnected
   socket.on("disconnect", () => {
-    console.log("user was dis-connected.");
+    // console.log("user was dis-connected.");
 
     // remove user
     const userRemoved = users.removeUser(socket.id);

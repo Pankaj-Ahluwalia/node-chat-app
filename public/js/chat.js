@@ -34,6 +34,11 @@ socket.on('disconnect',function(){
 });
 
 // CUSTOM EVENTS ---- listen to server-custom-event
+socket.on('updateUserList', function(users){
+    //  update users list...........
+    updateUserListCtl(users);
+});
+
 socket.on('newMessage', function(message){
     
     addMessageToList(message)
@@ -52,6 +57,10 @@ socket.on('newLocationMessage', function(message){
 
 // //////////////////////////////////////////////////////////////////
 
+/*
+ *  Client-side code - to manage inteaction with brwoser
+
+*/
 
 function decodeQryString(qryString){
      
@@ -160,6 +169,30 @@ function enableSendLocationBtn(blnEn){
 
 }
 
+function updateUserListCtl (users){
+    // console.log(users);
+
+    const lstDiv = document.getElementById('users');   
+    const lstUser = document.createElement('ol');
+    
+    // remove old children
+    lstDiv.removeChild(lstDiv.childNodes[0]);
+
+    users.forEach(function (el){
+        let item = document.createElement('li');
+        item.innerText =el;
+        lstUser.appendChild(item);        
+    })
+    
+    lstDiv.appendChild(lstUser);
+
+    // document.appendChild(lstUser);
+    
+     
+
+}
+
+
 document.getElementById('message-form').addEventListener('submit',(e)=>{
     // make sure the form is not submitted
     e.preventDefault();
@@ -179,6 +212,9 @@ document.getElementById('message-form').addEventListener('submit',(e)=>{
         textBox.focus();
     });
 });
+
+
+
 
 // LOCATION: send
  const locationButton = document.getElementById('send-location');

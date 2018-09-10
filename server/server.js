@@ -122,7 +122,7 @@ io.on("connection", socket => {
 
       io.to(roomLeft).emit(
         "newMessage",
-        generateMessage("Admin", `${userRemoved} has left.`)
+        generateMessage("Admin", `${userRemoved.name} has left.`)
       );
     }
   });

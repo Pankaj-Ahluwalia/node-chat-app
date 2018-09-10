@@ -49,11 +49,7 @@ socket.on('newMessage', function(message){
 
 // newLocationMessage
 socket.on('newLocationMessage', function(message){
-    // modify link url
-    message.text = `<a href="${message.url}" target="_blank" >My current location</a>`
-    // addMessageToList(message)
-
-    addLocationToList_mustache(message)
+    addLocationToList_mustache(message);
 });
 
 
@@ -189,7 +185,7 @@ function addLocationToList_mustache(message){
     var template = document.getElementById('message-template-location').innerHTML;
     
     var html = Mustache.render(template,{
-        url: message.text,
+        url: message.url,
         from: message.from,
         createdAt: formattedTime
     });     
@@ -199,7 +195,7 @@ function addLocationToList_mustache(message){
 
     item.innerHTML = html;
    
-    console.log (html);
+    console.log (message.url, item.innerHTML);
 
     list.appendChild(item);  
     

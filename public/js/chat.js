@@ -41,7 +41,9 @@ socket.on('updateUserList', function(users){
 
 socket.on('newMessage', function(message){
     
-    addMessageToList(message)
+    // addMessageToList(message)
+    addMessageToList_mustache(message)
+
 });
 
 
@@ -49,7 +51,9 @@ socket.on('newMessage', function(message){
 socket.on('newLocationMessage', function(message){
     // modify link url
     message.text = `<a href="${message.url}" target="_blank" >My current location</a>`
-    addMessageToList(message)
+    // addMessageToList(message)
+
+    addLocationToList_mustache(message)
 });
 
 
@@ -155,6 +159,53 @@ function addMessageToList(message){
 
     //  $('#mylist').animate({scrollTop: $('#mylist').prop("scrollHeight")}, 500);
 }
+
+function addMessageToList_mustache(message){
+    const formattedTime = moment(message.createdAt).format('h:mm a')
+
+    var template = document.getElementById('message-template').innerHTML;
+    
+    var html = Mustache.render(template,{
+        text: message.text,
+        from: message.from,
+        createdAt: formattedTime
+    });     
+
+    const list = document.getElementById('messages');
+    const item = document.createElement('li');
+
+    item.innerHTML = html;
+   
+    console.log (html);
+
+    list.appendChild(item);  
+    
+    item.scrollIntoView();
+}
+
+function addLocationToList_mustache(message){
+    const formattedTime = moment(message.createdAt).format('h:mm a')
+
+    var template = document.getElementById('message-template-location').innerHTML;
+    
+    var html = Mustache.render(template,{
+        url: message.text,
+        from: message.from,
+        createdAt: formattedTime
+    });     
+
+    const list = document.getElementById('messages');
+    const item = document.createElement('li');
+
+    item.innerHTML = html;
+   
+    console.log (html);
+
+    list.appendChild(item);  
+    
+    item.scrollIntoView();
+}
+
 
 function enableSendLocationBtn(blnEn){
     if (blnEn){

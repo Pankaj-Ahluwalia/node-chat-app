@@ -3,6 +3,8 @@ const socketIO = require("socket.io");
 const http = require("http");
 const path = require("path");
 
+
+
 const { generateMessage, generateLocationMessage } = require("./utils/message");
 const { isRealString } = require("./utils/validation");
 const { Users } = require("./utils/users");
@@ -14,6 +16,9 @@ const server = http.createServer(app);
 // app.use((req,res,next)=>{
 //     res.send("Hello World!");
 // });
+
+
+
 
 // WEBSOCKET-SERVER: capture reference to websocket server
 const io = socketIO(server);
